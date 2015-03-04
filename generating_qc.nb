@@ -1,0 +1,379 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     13176,        370]
+NotebookOptionsPosition[     11935,        325]
+NotebookOutlinePosition[     12268,        340]
+CellTagsIndexPosition[     12225,        337]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+We are interested in deriving formulas for the sequence of jump amplitudes of \
+a 1D chain given by the cut and project method.
+We call \[Alpha] the (irrational) slope of the quasicrystal line.\
+\>", "Text",
+ CellChangeTimes->{{3.63447696544233*^9, 3.634477034354376*^9}},
+ Background->GrayLevel[0.85]],
+
+Cell[TextData[{
+ "A point of the lattice writes x = n ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["e", "x"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " + m ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["e", "y"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " where ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["e", "x"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " and ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["e", "y"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " are the generating vectors of the superlattice (here a square), and n, m \
+integers.\nx is in the selected band iff n(1+\[Alpha]) \[LessEqual] l < \
+(n+1)(1+\[Alpha]), with l = n+m.\nThis is equivalent to n = ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"IntegerPart", "[", 
+    FractionBox["l", 
+     RowBox[{"1", "+", "\[Alpha]"}]], "]"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ "."
+}], "Text",
+ CellChangeTimes->{{3.63447706019398*^9, 3.6344771652823677`*^9}, {
+  3.634477196946889*^9, 3.6344772217945127`*^9}, {3.634477267474902*^9, 
+  3.634477329731015*^9}, {3.6344773712509727`*^9, 3.634477568802878*^9}},
+ Background->RGBColor[0.94, 0.91, 0.88]],
+
+Cell[TextData[{
+ "Note that l can serve as a labelling of the sites on the quasicrystal. It \
+is the standard (real space) labelling.\nIf l \[Rule] l+1, then either n or m \
+has increased by 1. If n has increased by 1, we have a coupling ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["t", "w"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " btw sites l and l+1.\nIf n has not increased (ie m has increased by 1), we \
+have a coupling ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["t", "s"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " btw sites l and l+1.\n\nThis translates into the following function taking \
+value 1 (n has increased) or 0 (m has increased)."
+}], "Text",
+ CellChangeTimes->{
+  3.634477572915392*^9, {3.634477610195036*^9, 3.634477651235147*^9}},
+ Background->RGBColor[0.94, 0.91, 0.88]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"\[Alpha]", "=", 
+   RowBox[{
+    RowBox[{"1", "/", "Pi"}], "//", "N"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.634464661128811*^9, 3.634464674655437*^9}, {
+  3.634465025616102*^9, 3.6344650258231487`*^9}, {3.634465162158979*^9, 
+  3.634465162948073*^9}, {3.634465337487104*^9, 3.634465337693841*^9}, {
+  3.634465524672679*^9, 3.634465525332358*^9}, {3.634465677055441*^9, 
+  3.634465677230381*^9}, {3.634466118671741*^9, 3.634466154006538*^9}, {
+  3.63446637006396*^9, 3.6344663702548313`*^9}, {3.634466455999826*^9, 
+  3.634466464495487*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib", "[", "n_", "]"}], ":=", 
+   RowBox[{
+    RowBox[{"IntegerPart", "[", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "+", "\[Alpha]"}], ")"}], 
+       RowBox[{"-", "1"}]], 
+      RowBox[{"(", " ", 
+       RowBox[{"n", "+", "1"}], ")"}]}], "]"}], "-", 
+    RowBox[{"IntegerPart", "[", 
+     RowBox[{
+      SuperscriptBox[
+       RowBox[{"(", 
+        RowBox[{"1", "+", "\[Alpha]"}], ")"}], 
+       RowBox[{"-", "1"}]], " ", 
+      RowBox[{"(", "n", ")"}]}], "]"}]}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.634464640353866*^9, 3.6344646573137608`*^9}}],
+
+Cell["This translates into a condition on mods:", "Text",
+ CellChangeTimes->{{3.634477674658815*^9, 3.63447769312342*^9}},
+ Background->RGBColor[0.94, 0.91, 0.88]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fib2", "[", "n_", "]"}], ":=", 
+  FractionBox[
+   RowBox[{"1", "-", 
+    RowBox[{"Mod", "[", 
+     RowBox[{
+      RowBox[{"n", "+", "1"}], ",", 
+      RowBox[{"1", "+", "\[Alpha]"}]}], "]"}], "+", 
+    RowBox[{"Mod", "[", 
+     RowBox[{"n", ",", 
+      RowBox[{"1", "+", "\[Alpha]"}]}], "]"}]}], 
+   RowBox[{"1", "+", "\[Alpha]"}]]}]], "Input",
+ CellChangeTimes->{{3.634464713848879*^9, 3.634464756195115*^9}, {
+  3.6344647897303667`*^9, 3.6344647940010557`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fib", "/@", 
+  RowBox[{"Range", "[", 
+   RowBox[{"Fibonacci", "[", "10", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.634464761165256*^9, 3.634464772607111*^9}, {
+  3.6344661448640633`*^9, 3.634466149937806*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1", ",", "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", 
+   ",", "1", ",", "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", 
+   "0", ",", "1", ",", "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", 
+   ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", 
+   "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", ",", "1", 
+   ",", "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", ",", 
+   "1", ",", "1", ",", "1", ",", "0", ",", "1", ",", "1", ",", "1", ",", "0", 
+   ",", "1", ",", "1"}], "}"}]], "Output",
+ CellChangeTimes->{{3.634464770046475*^9, 3.6344647729772*^9}, 
+   3.634465341564044*^9, 3.63446552908559*^9, 3.634465680925621*^9, {
+   3.634466121926581*^9, 3.634466156159822*^9}, {3.634466460088668*^9, 
+   3.634466466046805*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n", "=", "20"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fib2", "/@", 
+   RowBox[{"Range", "[", 
+    RowBox[{"Fibonacci", "[", "n", "]"}], "]"}]}], "==", 
+  RowBox[{"fib", "/@", 
+   RowBox[{"Range", "[", 
+    RowBox[{"Fibonacci", "[", "n", "]"}], "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.634464761165256*^9, 3.634464778366725*^9}, {
+  3.63446481884872*^9, 3.634464833485756*^9}, {3.634465316752586*^9, 
+  3.634465316864142*^9}, {3.634465406736494*^9, 3.634465408879775*^9}, {
+  3.634477723593594*^9, 3.634477723735034*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.634464778803526*^9, 3.6344648337869*^9}, 
+   3.634465030782728*^9, 3.634465317356182*^9, {3.634465407420411*^9, 
+   3.634465409273119*^9}, {3.6344664602361803`*^9, 3.6344664662214737`*^9}, 
+   3.6344777243533163`*^9}]
+}, Open  ]],
+
+Cell["A more elegant condition on mods", "Text",
+ CellChangeTimes->{{3.634477776226408*^9, 3.634477787170629*^9}},
+ Background->RGBColor[0.94, 0.91, 0.88]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib5", "[", "n_", "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Mod", "[", 
+       RowBox[{"n", ",", 
+        RowBox[{"1", "+", "\[Alpha]"}]}], "]"}], "\[GreaterEqual]", 
+      "\[Alpha]"}], ",", "1", ",", "0"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.634464932018408*^9, 3.6344649707196608`*^9}, {
+  3.634465110401766*^9, 3.6344651116636972`*^9}, {3.634465178273004*^9, 
+  3.634465186175189*^9}, {3.634465218671814*^9, 3.6344653090242157`*^9}, {
+  3.634465451824677*^9, 3.6344654536159782`*^9}, {3.6344654862732677`*^9, 
+  3.634465486432103*^9}, {3.634465532369155*^9, 3.6344655325604467`*^9}, {
+  3.6344656022731943`*^9, 3.6344656682245092`*^9}, {3.6344657357299633`*^9, 
+  3.634465766498227*^9}, {3.634465993859638*^9, 3.6344660040012827`*^9}, {
+  3.634466244547614*^9, 3.6344662462742147`*^9}, {3.634466359362245*^9, 
+  3.634466388304899*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n", "=", "20"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fib5", "/@", 
+   RowBox[{"Range", "[", 
+    RowBox[{"Fibonacci", "[", "n", "]"}], "]"}]}], "==", 
+  RowBox[{"fib", "/@", 
+   RowBox[{"Range", "[", 
+    RowBox[{"Fibonacci", "[", "n", "]"}], "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.634464761165256*^9, 3.634464778366725*^9}, {
+  3.63446481884872*^9, 3.634464833485756*^9}, {3.634465316752586*^9, 
+  3.634465316864142*^9}, {3.634465406736494*^9, 3.634465408879775*^9}, {
+  3.634466282000578*^9, 3.634466282239787*^9}, {3.634477770713814*^9, 
+  3.6344777708547173`*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{
+  3.6344663962168617`*^9, {3.634466460694273*^9, 3.6344664668838367`*^9}, 
+   3.634477771366596*^9}]
+}, Open  ]],
+
+Cell["Now, if \[Alpha]=p/q is a rational, we easily get:", "Text",
+ CellChangeTimes->{{3.634477800562889*^9, 3.634477843954513*^9}},
+ Background->RGBColor[0.94, 0.91, 0.88]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n", "=", "10"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p", "=", 
+   RowBox[{"Fibonacci", "[", 
+    RowBox[{"n", "-", "2"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"q", "=", 
+   RowBox[{"Fibonacci", "[", 
+    RowBox[{"n", "-", "1"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Alpha]", "=", 
+   RowBox[{"p", "/", "q"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.634477846000691*^9, 3.634477863143106*^9}, {
+  3.634477920054242*^9, 3.634477943046816*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib6", "[", "n_", "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"Mod", "[", 
+       RowBox[{
+        RowBox[{"q", " ", "n"}], ",", 
+        RowBox[{"p", "+", "q"}]}], "]"}], "\[GreaterEqual]", "p"}], ",", "1", 
+     ",", "0"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.634464932018408*^9, 3.6344649707196608`*^9}, {
+  3.634465110401766*^9, 3.6344651116636972`*^9}, {3.634465178273004*^9, 
+  3.634465186175189*^9}, {3.634465218671814*^9, 3.6344653090242157`*^9}, {
+  3.634465451824677*^9, 3.6344654536159782`*^9}, {3.6344654862732677`*^9, 
+  3.634465486432103*^9}, {3.634465532369155*^9, 3.6344655325604467`*^9}, {
+  3.6344656022731943`*^9, 3.6344656682245092`*^9}, {3.6344657357299633`*^9, 
+  3.634465766498227*^9}, {3.634465993859638*^9, 3.6344660040012827`*^9}, {
+  3.634466244547614*^9, 3.6344662462742147`*^9}, {3.634466359362245*^9, 
+  3.634466388304899*^9}, {3.634477821415244*^9, 3.634477839798998*^9}}],
+
+Cell["By the way, this proves that the chain is p+q periodic.", "Text",
+ CellChangeTimes->{{3.634478078802849*^9, 3.634478095555009*^9}},
+ Background->RGBColor[0.94, 0.91, 0.88]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fib6", "/@", 
+  RowBox[{"Range", "[", 
+   RowBox[{"p", "+", "q"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.634477871332767*^9, 3.63447792899816*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1", ",", "0", ",", "1", ",", "1", ",", "0", ",", "1", ",", "0", ",", "1", 
+   ",", "1", ",", "0", ",", "1", ",", "1", ",", "0", ",", "1", ",", "0", ",", 
+   "1", ",", "1", ",", "0", ",", "1", ",", "0", ",", "1", ",", "1", ",", "0", 
+   ",", "1", ",", "1", ",", "0", ",", "1", ",", "0", ",", "1", ",", "1", ",", 
+   "0", ",", "1", ",", "1", ",", "0", ",", "1", ",", "0", ",", "1", ",", "1", 
+   ",", "0", ",", "1", ",", "0", ",", "1", ",", "1", ",", "0", ",", "1", ",", 
+   "1", ",", "0", ",", "1", ",", "0", ",", "1", ",", "1", ",", "0", ",", "1", 
+   ",", "1", ",", "0"}], "}"}]], "Output",
+ CellChangeTimes->{3.634477929335343*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fib6", "/@", 
+   RowBox[{"Range", "[", 
+    RowBox[{"p", "+", "q"}], "]"}]}], "==", 
+  RowBox[{"fib", "/@", 
+   RowBox[{"Range", "[", 
+    RowBox[{"q", "+", "p"}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6344779603261642`*^9, 3.634477969782295*^9}}],
+
+Cell[BoxData["True"], "Output",
+ CellChangeTimes->{{3.634477964944323*^9, 3.634477970029022*^9}}]
+}, Open  ]]
+},
+WindowSize->{1680, 994},
+WindowMargins->{{Automatic, 0}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Linux x86 (64-bit) (June 27, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 312, 6, 67, "Text"],
+Cell[873, 28, 1178, 35, 103, "Text"],
+Cell[2054, 65, 826, 19, 127, "Text"],
+Cell[2883, 86, 580, 11, 32, "Input"],
+Cell[3466, 99, 636, 20, 38, "Input"],
+Cell[4105, 121, 163, 2, 47, "Text"],
+Cell[4271, 125, 498, 14, 63, "Input"],
+Cell[CellGroupData[{
+Cell[4794, 143, 239, 5, 32, "Input"],
+Cell[5036, 150, 867, 14, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5940, 169, 574, 13, 55, "Input"],
+Cell[6517, 184, 271, 4, 32, "Output"]
+}, Open  ]],
+Cell[6803, 191, 155, 2, 47, "Text"],
+Cell[6961, 195, 936, 19, 32, "Input"],
+Cell[CellGroupData[{
+Cell[7922, 218, 625, 14, 55, "Input"],
+Cell[8550, 234, 152, 3, 32, "Output"]
+}, Open  ]],
+Cell[8717, 240, 173, 2, 47, "Text"],
+Cell[8893, 244, 544, 15, 99, "Input"],
+Cell[9440, 261, 996, 20, 32, "Input"],
+Cell[10439, 283, 178, 2, 47, "Text"],
+Cell[CellGroupData[{
+Cell[10642, 289, 174, 4, 32, "Input"],
+Cell[10819, 295, 676, 11, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11532, 311, 287, 8, 32, "Input"],
+Cell[11822, 321, 97, 1, 32, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
